@@ -10,16 +10,20 @@ jobs:
     runs-on: macos-13
 
     steps:
+      - name: Install Docker for Mac
+        run: brew install --cask docker
+
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           repository: "ValveSoftware/Proton"
           ref: "proton_9.0"
           depth: 1
-          submodule: recursive
+          submodules: recursive
           path: proton
       
-      - run: mkdir build && cd build && ../proton/configure.sh
+      - name: configure
+        run: mkdir build && cd build && ../proton/configure.sh
 
       - run: make wineopenxr
         working-directory: build
