@@ -1,0 +1,22 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: macos-10.14
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          repository: "ValveSoftware/Proton"
+          ref: "proton_9.0"
+          depth: 1
+          submodule: recursive
+          path: proton
+      
+      - run: mkdir build && cd build && ../proton/configure.sh --help
