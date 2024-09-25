@@ -12,6 +12,12 @@ jobs:
     steps:
       - name: Install Docker for Mac
         run: brew install --cask docker
+      - name: Launch Docker for Mac
+        run: |
+          open /Applications/Docker.app
+          # Wait until Docker is ready
+          while ! docker system info > /dev/null 2>&1; do sleep 1; done
+        timeout-minutes: 5
 
       - name: Checkout code
         uses: actions/checkout@v4
