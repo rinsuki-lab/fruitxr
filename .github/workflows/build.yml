@@ -19,4 +19,7 @@ jobs:
           submodule: recursive
           path: proton
       
-      - run: mkdir build && cd build && ../proton/configure.sh --help
+      - run: mkdir build && cd build && ../proton/configure.sh
+
+      - run: make wineopenxr
+        working-directory: build
